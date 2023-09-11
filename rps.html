@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <title>Rock Paper Scissors Game</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap-5.3.1-dist\css\bootstrap.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="game.css">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <span class="modal-body">
+                <center><h1 id="modal" style="font-size: 50px; font-weight: bolder; color: red; background-color: white; display: inline;"></h1></center>
+            </span>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>You:<span id="uc"></span></h2>
+                </div>
+                <div class="col-md-7 offset"></div>
+                <div class="col-md-1">
+                    <h2>PC: <span id="cc"></span></h2>
+                </div>
+            </div><br><br>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 id="t1">Rock Paper Scissors</h1>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-1 offset"></div>
+                <div class="col-md-2">
+                    <img src="rock.png" alt="rock" id="ro">
+                </div>
+                <div class="col-md-2 offset"></div>
+                <div class="col-md-2">
+                    <img src="paper.png" alt="paper" id="pa">
+                </div>
+                <div class="col-md-2 offset"></div>
+                <div class="col-md-2">
+                    <img src="scissor.png" alt="scissor" id="sc">
+                </div>
+                <div class="col-md-1 offset"></div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-1 offset"></div>
+                <div class="col-md-2">
+                    <button class="btn" id="rock" onclick="rockcolor()" >Rock</button>
+                </div>
+                <div class="col-md-2 offset"></div>
+                <div class="col-md-2">
+                    <button class="btn" id="paper" onclick="papercolor()">Paper</button>
+                </div>
+                <div class="col-md-2 offset"></div>
+                <div class="col-md-2">
+                   <button class="btn" id="scissor" onclick="scissorcolor()">Scissors</button>
+                </div>
+                <div class="col-md-1 offset"></div>
+            </div>
+        </div>
+        <script>
+            let up=0;
+            let cp=0;
+            var i1=document.getElementById('ro');
+            var i2=document.getElementById('pa');
+            var i3=document.getElementById('sc');
+        function rockcolor(){
+            i1.style.background='white';
+            i2.style.background='bisque';
+            i3.style.background='bisque';
+            play("rock");
+        }
+        function papercolor(){
+            i2.style.background='white';
+            i1.style.background='bisque';
+            i3.style.background='bisque';
+            play("paper");
+        }
+        function scissorcolor(){
+            i3.style.background='white';
+            i1.style.background='bisque';
+            i2.style.background='bisque';
+            play("scissors");
+        }
+        function play(pchoice) {
+            const computer = cchoice();
+            const result = winner(pchoice, computer);
+            updateUI();
+        }
+        function cchoice() {
+            var a=document.getElementsByTagName('img');
+            const choices = ["rock", "paper", "scissors"];
+            const random = Math.floor(randomNumber(0,2));
+            for(var i=0;i<choices.length;i++){
+                if(a[i].alt==choices[random]){
+                    a[i].style.background="yellow";
+                }
+            }
+            return choices[random];
+        }
+        function randomNumber(min, max) {
+   		 return Math.random() * (max - min) + min;
+	    }
+        var b=document.getElementById('modal');
+        function winner(pchoice, cchoice) {
+            if (pchoice === cchoice) {
+               myModal();
+            } 
+            else if ((pchoice === "rock" && cchoice === "scissors") ||(pchoice === "paper" && cchoice === "rock") ||(pchoice === "scissors" && cchoice === "paper")) {
+                up++;
+                b.innerText='';
+            } 
+            else {
+                b.innerText='';
+                cp++;
+            }
+        }
+        function updateUI(){
+            document.getElementById('uc').textContent=up;
+            document.getElementById('cc').textContent=cp;
+        }
+        function myModal(){
+            b.innerText="DRAW!!!";
+        }
+        </script>
+    </body>
+</html>

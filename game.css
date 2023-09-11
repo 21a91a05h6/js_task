@@ -1,0 +1,21 @@
+body{
+    background-color: bisque;
+}
+img{
+    height: 250px;
+    width: 250px;
+}
+#pics{
+    width: 100%;
+}
+#t1{
+    text-align: center;
+    font-size: 70px;
+    font-weight: bolder;
+}
+.btn{
+    width: 250px;
+    text-align: center;
+    border: 3px solid black;
+    font-weight: bolder;
+}
